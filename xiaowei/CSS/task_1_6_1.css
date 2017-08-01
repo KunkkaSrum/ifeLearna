@@ -1,6 +1,7 @@
 .bg_body{
   width:980px;
   height: 1386px;
+  margin:auto;
   background-color: white;
 }
 body{

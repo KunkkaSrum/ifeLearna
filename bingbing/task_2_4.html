@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+    span{
+      padding: 4px;
+      background-color: red;
+      margin-top: 8px;
+      margin-right: 5px;
+      color: white;
+      float: left;
+    }
+  </style>
+</head>
+<body>
+
+  <input type="text" id="in" name="" value="">
+  <button  id="left_in" value="左侧入">左侧入</button>
+  <button  id="right_in" value="右侧入">右侧入</button>
+  <button  id="left_out" value="左侧出" style="margin-left:20px">左侧出</button>
+  <button  id="right_out" value="左侧出">左侧出</button><br>
+  <div id="output"></div>
+  <script type="text/javascript">
+    var left_in = document.getElementById("left_in"),
+        right_in = document.getElementById("right_in"),
+        left_out = document.getElementById("left_out"),
+        right_out = document.getElementById("right_out"),
+        in_put = document.getElementById("in");
+
+    var reg = new RegExp("^[0-9]*$"),
+        list = [];
+
+    left_in.onclick=function(){
+      if(reg.test(in_put.value)) {
+        list.unshift(in_put.value);
+      }else{alert("请输入数字");in_put.value="";}
+      init(list);
+    }
+    right_in.onclick=function(){
+      if(reg.test(in_put.value)) {
+        list.push(in_put.value);
+      }else{alert("请输入数字");in_put.value="";}
+      init(list);
+    }
+    left_out.onclick=function(){
+      alert(list[list.length-1]);
+      list.shift();
+      init(list);
+    }
+    right_out.onclick=function(){
+      alert(list[list.length-1]);
+      list.pop();
+      init(list);
+    }
+    // document.getElementsByTagName("div").onclick=function(){
+    //   alert("!!!");
+    // }
+    function init(data){
+      var childs = document.getElementById("output").childNodes;
+      for(var i = childs.length - 1; i >= 0; i--) {
+        document.getElementById("output").removeChild(childs[i]);
+      }
+      for(var i=0; i<list.length; ++i){
+        var spanItem = document.createElement("span");
+        spanItem.innerHTML = data[i];
+        document.getElementById("output").appendChild(spanItem);
+      }
+    }
+  </script>
+</body>
+</html>
